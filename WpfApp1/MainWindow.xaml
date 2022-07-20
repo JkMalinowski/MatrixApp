@@ -8,17 +8,17 @@
         Title="MainWindow" Height="700" Width="900">
     <Grid x:Name="MainGrid">
         <Frame x:Name="MainFrame"/>
-        <Label Content="Size of array (1-10)" HorizontalAlignment="Left" Margin="40,40,0,0" VerticalAlignment="Top" FontSize="24"/>
-        <TextBox Name="filePath" HorizontalAlignment="Left" Margin="471,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="400" Height="50" FontSize="18" IsEnabled="False"/>
-        <Button Content="Load file" HorizontalAlignment="Left" Margin="360,88,0,0" VerticalAlignment="Top" FontSize="22" Height="35" Width="90" Click="Button_Click"/>
-        <TextBox x:Name="TextBox1" HorizontalAlignment="Left" Margin="59,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="24" KeyDown="TextBox_KeyDown"/>
-        <Button x:Name="generate" Content="Generate" HorizontalAlignment="Left" Margin="220,87,0,0" VerticalAlignment="Top" FontSize="24" Click="Button_Click_1"/>
-        <Button x:Name="FillInArrayRandomNumbers" Content="Fill in array random numbers" HorizontalAlignment="Left" Margin="55,607,0,0" VerticalAlignment="Top" Height="47" Width="155" Click="FillInArrayRandomNumbers_Click" Visibility="Hidden" />
-        <Button x:Name="calculate" Content="Calculate" HorizontalAlignment="Left" Margin="700,583,0,0" VerticalAlignment="Top" FontSize="20" Click="Calculate_Click" Visibility="Hidden"/>
-        <Label x:Name="result" Content="" HorizontalAlignment="Left" Margin="631,215,0,0" VerticalAlignment="Top" FontSize="12" Width="240" Height="117"/>
-        <TextBox x:Name="rowTextBox" HorizontalAlignment="Left" Margin="680,452,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="24" Height="34" KeyDown="TextBox_KeyDown_1" Visibility="Hidden"/>
+        <Label x:Name="sizeOfArrayLabel" Content="Size of array (1-10)" HorizontalAlignment="Left" Margin="40,40,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <TextBox x:Name="filePathTextBox" HorizontalAlignment="Left" Margin="471,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="400" Height="50" FontSize="18" IsEnabled="False"/>
+        <Button x:Name="loadFileButton" Content="Load file" HorizontalAlignment="Left" Margin="360,88,0,0" VerticalAlignment="Top" FontSize="22" Height="35" Width="90" Click="LoadFileButton_Click"/>
+        <TextBox x:Name="sizeOfArrayTextBox" HorizontalAlignment="Left" Margin="59,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="24" KeyDown="SizeOfArrayTextBox_KeyDown" />
+        <Button x:Name="generateButton" Content="Generate" HorizontalAlignment="Left" Margin="220,87,0,0" VerticalAlignment="Top" FontSize="24" Click="GenerateButton_Click"/>
+        <Button x:Name="fillInArrayRandomNumbersButton" Content="Fill in array random numbers" HorizontalAlignment="Left" Margin="55,607,0,0" VerticalAlignment="Top" Height="47" Width="155" Click="FillInArrayRandomNumbersButton_Click" Visibility="Hidden" />
+        <Button x:Name="calculateButton" Content="Calculate" HorizontalAlignment="Left" Margin="700,583,0,0" VerticalAlignment="Top" FontSize="20" Click="CalculateButton_Click" Visibility="Hidden"/>
+        <Label x:Name="resultLabel" Content="" HorizontalAlignment="Left" Margin="631,215,0,0" VerticalAlignment="Top" FontSize="12" Width="240" Height="117"/>
+        <TextBox x:Name="rowTextBox" HorizontalAlignment="Left" Margin="680,452,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="24" Height="34" KeyDown="RowTextBox_KeyDown" Visibility="Hidden"/>
         <Label x:Name="rowLabel" Content="Row" HorizontalAlignment="Left" Margin="680,405,0,0" VerticalAlignment="Top" FontSize="24" RenderTransformOrigin="1.125,0.1" Visibility="Hidden"/>
         <Label x:Name="columnLabel" Content="Column" HorizontalAlignment="Left" Margin="680,491,0,0" VerticalAlignment="Top" FontSize="24" Visibility="Hidden"/>
-        <TextBox x:Name="columnTextBox" HorizontalAlignment="Left" Margin="680,538,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="24" Height="34" KeyDown="TextBox_KeyDown_2" Visibility="Hidden"/>
+        <TextBox x:Name="columnTextBox" HorizontalAlignment="Left" Margin="680,538,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="24" Height="34" KeyDown="ColumnTextBox_KeyDown" Visibility="Hidden"/>
     </Grid>
 </Window>

@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.IO;
-using System.Windows;
-using Microsoft.Win32;
-using System.Windows.Input;
-using System.Windows.Controls;
 using System.Text.RegularExpressions;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace WpfApp1
 {
-   public partial class MainWindow : Window
+    public partial class MainWindow : Window
    {
         private TextBox[,] textBoxs;
         private int size;
@@ -16,14 +16,13 @@ namespace WpfApp1
         {
             InitializeComponent();          
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void LoadFileButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Files (*.txt)(*.csv)(*.xlsx)|*.txt|All files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == true)
             {
-                filePath.Text = openFileDialog.FileName;
+                filePathTextBox.Text = openFileDialog.FileName;
                 size = File.ReadAllLines(openFileDialog.FileName).Length;
                 if (size > 10)
                 {
@@ -32,7 +31,7 @@ namespace WpfApp1
                 }
                 CreateGrid(size);
                 ChangeControlsState();
-                TextBox1.Text = size.ToString();
+                sizeOfArrayTextBox.Text = size.ToString();
                 using (StreamReader file = new StreamReader(openFileDialog.FileName))
                 {
                     string line;
@@ -52,7 +51,7 @@ namespace WpfApp1
                 }
             }
         }
-        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        private void SizeOfArrayTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             Regex rg = new Regex("[0-9]");
             if (!rg.IsMatch(e.Key.ToString()))
@@ -60,18 +59,17 @@ namespace WpfApp1
                 e.Handled = true;
             }
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void GenerateButton_Click(object sender, RoutedEventArgs e)
         {
-            if (TextBox1.Text == String.Empty)
+            if (sizeOfArrayTextBox.Text == String.Empty)
             {
                 MessageBox.Show("The value should be in range 1-10");
                 return;
             }  
-            int number = int.Parse(TextBox1.Text);
+            int number = int.Parse(sizeOfArrayTextBox.Text);
             if (number < 0 || number > 10)
             {
-                TextBox1.Text = String.Empty;
+                sizeOfArrayTextBox.Text = String.Empty;
                 MessageBox.Show("The value should be in range 1-10");
                 return;
             }
@@ -79,20 +77,18 @@ namespace WpfApp1
             ChangeControlsState();
             CreateGrid(number);
         }
-
         private void ChangeControlsState()
         {
-            FillInArrayRandomNumbers.Visibility = Visibility.Visible;
+            fillInArrayRandomNumbersButton.Visibility = Visibility.Visible;
             rowLabel.Visibility = Visibility.Visible;
             rowTextBox.Visibility = Visibility.Visible;
             columnLabel.Visibility = Visibility.Visible;
             columnTextBox.Visibility = Visibility.Visible;
-            calculate.Visibility = Visibility.Visible;
-
+            calculateButton.Visibility = Visibility.Visible;
             columnLabel.Content = $"Columns (1-{size})";
             rowLabel.Content = $"Rows (1-{size})";
-            TextBox1.IsEnabled = false;
-            generate.IsEnabled = false;
+            sizeOfArrayTextBox.IsEnabled = false;
+            generateButton.IsEnabled = false;
         }
         private string OrdinalNumber(int number)
         {
@@ -121,13 +117,11 @@ namespace WpfApp1
             ColumnDefinition[] columns = new ColumnDefinition[size];
             RowDefinition[] rows = new RowDefinition[size];
             textBoxs = new TextBox[size, size];
-
             for(int i = 0; i < size; i++)
             {
                 columns[i] = new ColumnDefinition();
                 grid.ColumnDefinitions.Add(columns[i]);
             }
-
             for (int i = 0; i < size; i++)
             {
                 rows[i] = new RowDefinition();
@@ -147,8 +141,7 @@ namespace WpfApp1
             }
             MainFrame.Content = grid;
         }
-
-        private void FillInArrayRandomNumbers_Click(object sender, RoutedEventArgs e)
+        private void FillInArrayRandomNumbersButton_Click(object sender, RoutedEventArgs e)
         {
             Random rnd = new Random();
             for(int i=0; i<size; i++)
@@ -159,8 +152,7 @@ namespace WpfApp1
                 }
             }
         }
-
-        private void Calculate_Click(object sender, RoutedEventArgs e)
+        private void CalculateButton_Click(object sender, RoutedEventArgs e)
         {
             int[,] numbers = new int[size, size];
             for(int i = 0; i < size; i++)
@@ -170,7 +162,6 @@ namespace WpfApp1
                     numbers[i, j] = int.Parse(textBoxs[i, j].Text);
                 }
             }
-
             Array array = new Array(numbers, size);
             MessageBox.Show("Data has been saved to file array.txt");
             array.SaveToFile();
@@ -180,9 +171,9 @@ namespace WpfApp1
                 int row = int.Parse(rowTextBox.Text);
                 if (row > size || column > size)
                     throw(new System.FormatException());
-                result.Content = $"Sum {OrdinalNumber(row)} row equals {array.SumIndicatedRow(row)}\n";
-                result.Content += $"Sum {OrdinalNumber(column)} column equals {array.SumIndicatedColumn(column)}\n";
-                result.Content += $"Sum main diagonal equals {array.SumMainDiagonal()}";
+                resultLabel.Content = $"Sum {OrdinalNumber(row)} row equals {array.SumIndicatedRow(row)}\n";
+                resultLabel.Content += $"Sum {OrdinalNumber(column)} column equals {array.SumIndicatedColumn(column)}\n";
+                resultLabel.Content += $"Sum main diagonal equals {array.SumMainDiagonal()}";
             }
             catch(System.FormatException ex)
             {
@@ -191,8 +182,7 @@ namespace WpfApp1
                 columnTextBox.Text = String.Empty;
             }
         }
-
-        private void TextBox_KeyDown_1(object sender, KeyEventArgs e)
+        private void RowTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             Regex rg = new Regex("[0-9]");
             if (!rg.IsMatch(e.Key.ToString()))
@@ -200,8 +190,7 @@ namespace WpfApp1
                 e.Handled = true;
             }
         }
-
-        private void TextBox_KeyDown_2(object sender, KeyEventArgs e)
+        private void ColumnTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             Regex rg = new Regex("[0-9]");
             if (!rg.IsMatch(e.Key.ToString()))
